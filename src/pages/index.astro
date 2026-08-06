@@ -1,0 +1,80 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const name = "M.Yonemura";
+
+const skills = [
+	{ title: "Astroの基礎", status: "学習中" },
+	{ title: "Layoutとprops", status: "完了" },
+	{ title: "配列とmap", status: "今ここ" },
+];
+
+const posts = (await getCollection('blog')).slice(0, 3);
+---
+
+<Layout title="トップページ | astrobox">
+	<section
+	class="text-white text-center py-5"
+	style="background-image: url('/head_astro.jpg'); background-size: cover; background-position: center;"
+>
+
+		<div class="container">
+			<h1 class="display-4">こんにちは、{name}です</h1>
+			<p class="lead">Astroを勉強しながらサイトを作っています。</p>
+			<a href="#skills" class="btn btn-primary btn-lg">詳しく見る</a>
+		</div>
+	</section>
+
+	<section id="about" class="py-5">
+		<div class="container">
+			<h2>自己紹介</h2>
+			<p>ここに自己紹介文を書きます。</p>
+		</div>
+	</section>
+
+	<section id="skills" class="py-5 bg-light">
+		<div class="container">
+			<h2>学習の記録</h2>
+			<div class="row">
+				{skills.map((skill) => (
+					<div class="col-md-4 mb-3">
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title">{skill.title}</h5>
+								<p class="card-text">{skill.status}</p>
+							</div>
+						</div>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section id="blog" class="py-5">
+		<div class="container">
+			<h2>最新のブログ記事</h2>
+			<div class="row">
+				{posts.map((post) => (
+					<div class="col-md-4 mb-3">
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title">{post.data.title}</h5>
+								<p class="card-text">{post.data.description}</p>
+								<a href={`/blog/${post.id}`} class="btn btn-outline-primary">読む</a>
+							</div>
+						</div>
+					</div>
+				))}
+			</div>
+			<a href="/blog" class="btn btn-secondary">ブログ一覧を見る</a>
+		</div>
+	</section>
+
+	<section id="contact" class="py-5 bg-dark text-white text-center">
+		<div class="container">
+			<h2>お問い合わせ</h2>
+			<p>ここに連絡先やSNSリンクを書きます。</p>
+		</div>
+	</section>
+</Layout>
