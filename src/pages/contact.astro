@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="お問い合わせ | astrobox">
+	<div class="container py-5">
+		<h1>お問い合わせ</h1>
+		<form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thanks">
+			<input type="hidden" name="form-name" value="contact" />
+			<p class="d-none">
+				<label>Don't fill this out if you're human: <input name="bot-field" /></label>
+			</p>
+			<div class="mb-3">
+				<label for="name" class="form-label">お名前</label>
+				<input type="text" class="form-control" id="name" name="name" required />
+			</div>
+			<div class="mb-3">
+				<label for="email" class="form-label">メールアドレス</label>
+				<input type="email" class="form-control" id="email" name="email" required />
+			</div>
+			<div class="mb-3">
+				<label for="message" class="form-label">メッセージ</label>
+				<textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+			</div>
+			<button type="submit" class="btn btn-primary">送信</button>
+		</form>
+	</div>
+</Layout>
