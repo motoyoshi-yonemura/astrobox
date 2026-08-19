@@ -1,0 +1,15 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="自己紹介 | astrobox">
+	<div class="container py-5">
+		<h1>自己紹介</h1>
+		<p>
+			M.Yonemuraです。Astroを勉強しながら、このサイトを少しずつ作っています。
+		</p>
+		<p>
+			興味があること・経歴などをここに自由に書いてください。
+		</p>
+	</div>
+</Layout>
