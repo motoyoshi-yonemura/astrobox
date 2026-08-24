@@ -2,6 +2,7 @@
 title: "はじめてのブログ記事"
 description: "Astroの勉強を始めました"
 pubDate: 2026-07-16
+tags: ["Astro", "学習"]
 ---
 
 Astroの勉強を始めました。今日はコンテンツコレクションという仕組みを使って、Markdownでブログ記事を書く方法を学びました。
