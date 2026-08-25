@@ -1,12 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+export const prerender = true;
 ---
 
 <Layout title="お問い合わせ | astrobox">
 	<div class="container py-5">
 		<h1>お問い合わせ</h1>
-		<form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thanks">
-			<input type="hidden" name="form-name" value="contact" />
+		<form method="POST" action="/api/contact">
 			<p class="d-none">
 				<label>Don't fill this out if you're human: <input name="bot-field" /></label>
 			</p>
