@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../../layouts/Layout.astro';
+import { excerpt } from '../../../lib/excerpt';
 
 export const prerender = true;
 
@@ -30,7 +31,7 @@ const { posts } = Astro.props;
 					<div class="card">
 						<div class="card-body">
 							<h5 class="card-title">{post.data.title}</h5>
-							<p class="card-text">{post.data.description}</p>
+							<p class="card-text">{excerpt(post.body ?? '')}</p>
 							<a href={`/blog/${post.id}`} class="btn btn-primary">読む</a>
 						</div>
 					</div>

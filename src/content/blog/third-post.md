@@ -1,6 +1,5 @@
 ---
 title: "３回目の記事"
-description: "ブログ構造化用の追加"
 pubDate: 2026-08-24
 tags: ["astro", "階層化", "microCMS"]
 ---

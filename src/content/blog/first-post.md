@@ -1,6 +1,5 @@
 ---
 title: "はじめてのブログ記事"
-description: "Astroの勉強を始めました"
 pubDate: 2026-07-16
 tags: ["Astro", "学習"]
 ---
