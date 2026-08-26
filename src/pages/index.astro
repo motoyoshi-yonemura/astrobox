@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import { excerpt } from '../lib/excerpt';
 
 export const prerender = true;
 
@@ -25,13 +26,6 @@ const posts = (await getCollection('blog')).slice(0, 3);
 			<h1 class="display-4">こんにちは、{name}です</h1>
 			<p class="lead">Astroを勉強しながらサイトを作っています。</p>
 			<a href="#skills" class="btn btn-primary btn-lg">詳しく見る</a>
-		</div>
-	</section>
-
-	<section id="about" class="py-5">
-		<div class="container">
-			<h2>自己紹介</h2>
-			<p>ここに自己紹介文を書きます。</p>
 		</div>
 	</section>
 
@@ -62,7 +56,7 @@ const posts = (await getCollection('blog')).slice(0, 3);
 						<div class="card">
 							<div class="card-body">
 								<h5 class="card-title">{post.data.title}</h5>
-								<p class="card-text">{post.data.description}</p>
+								<p class="card-text">{excerpt(post.body ?? '')}</p>
 								<a href={`/blog/${post.id}`} class="btn btn-outline-primary">読む</a>
 							</div>
 						</div>
