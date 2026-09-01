@@ -1,0 +1,17 @@
+{
+	"$schema": "https://unpkg.com/wrangler/config-schema.json",
+	"name": "astrobox",
+	"compatibility_date": "2026-08-27",
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "astrobox-contacts",
+			"database_id": "793c2cdf-79d0-4d62-ab9e-63e90d8bf158"
+		}
+	],
+	// RESEND_API_KEY: 値は "wrangler secret put RESEND_API_KEY" で本番シークレットとして登録する。
+	// ここでの空文字は型生成のためのプレースホルダーで、実際の値ではない。
+	"vars": {
+		"RESEND_API_KEY": ""
+	}
+}

@@ -1,9 +1,24 @@
 import type { APIRoute } from 'astro';
+import { env } from 'cloudflare:workers';
 
 export const prerender = false;
 
-const GAS_URL =
-	'https://script.google.com/macros/s/AKfycbw1RfSowg5J7L2IHON4DPj7rCwym1VDM7_sIZK5qumwBA9sg-D92nXhWl3Ih4Q31bi3/exec';
+const RESEND_FROM = 'Astrobox <onboarding@resend.dev>';
+const OWNER_EMAIL = 'yomomobile@gmail.com';
+
+async function sendMail(to: string, subject: string, text: string) {
+	const res = await fetch('https://api.resend.com/emails', {
+		method: 'POST',
+		headers: {
+			Authorization: `Bearer ${env.RESEND_API_KEY}`,
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({ from: RESEND_FROM, to, subject, text }),
+	});
+	if (!res.ok) {
+		console.error('Resend送信失敗', to, await res.text());
+	}
+}
 
 export const POST: APIRoute = async ({ request, redirect }) => {
 	const formData = await request.formData();
@@ -21,14 +36,25 @@ export const POST: APIRoute = async ({ request, redirect }) => {
 		return new Response('必須項目が入力されていません', { status: 400 });
 	}
 
-	await fetch(GAS_URL, {
-		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({
-			id: crypto.randomUUID(),
-			data: { name, email, message },
-		}),
-	});
+	const id = crypto.randomUUID();
+	await env.DB.prepare(
+		'INSERT INTO contacts (id, name, email, message) VALUES (?, ?, ?, ?)',
+	)
+		.bind(id, name, email, message)
+		.run();
+
+	await Promise.all([
+		sendMail(
+			String(email),
+			'お問い合わせありがとうございます',
+			`${name} 様\n\nお問い合わせいただきありがとうございます。以下の内容で受け付けました。\n\n---\n${message}\n---\n\n内容を確認の上、担当者よりご連絡いたします。`,
+		),
+		sendMail(
+			OWNER_EMAIL,
+			'【astrobox】お問い合わせが届きました',
+			`お名前: ${name}\nメール: ${email}\n\n${message}`,
+		),
+	]);
 
 	return redirect('/thanks');
 };
