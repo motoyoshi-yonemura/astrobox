@@ -36,6 +36,10 @@ export const POST: APIRoute = async ({ request, redirect }) => {
 		return new Response('必須項目が入力されていません', { status: 400 });
 	}
 
+	if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email))) {
+		return new Response('メールアドレスの形式が正しくありません', { status: 400 });
+	}
+
 	const id = crypto.randomUUID();
 	await env.DB.prepare(
 		'INSERT INTO contacts (id, name, email, message) VALUES (?, ?, ?, ?)',
