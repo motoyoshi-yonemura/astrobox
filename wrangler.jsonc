@@ -8,5 +8,15 @@
 			"database_name": "astrobox-contacts",
 			"database_id": "793c2cdf-79d0-4d62-ab9e-63e90d8bf158"
 		}
+	],
+	"ratelimits": [
+		{
+			"name": "CONTACT_RATE_LIMITER",
+			"namespace_id": "1001",
+			"simple": {
+				"limit": 5,
+				"period": 60
+			}
+		}
 	]
 }

@@ -21,6 +21,14 @@ async function sendMail(to: string, subject: string, text: string) {
 }
 
 export const POST: APIRoute = async ({ request, redirect }) => {
+	const ip = request.headers.get('cf-connecting-ip') ?? 'unknown';
+	const { success } = await env.CONTACT_RATE_LIMITER.limit({ key: ip });
+	if (!success) {
+		return new Response('送信回数が多すぎます。しばらく時間をおいて再度お試しください。', {
+			status: 429,
+		});
+	}
+
 	const formData = await request.formData();
 
 	// ハニーポット: 人間には見えない欄が埋まっていたらbotとみなし、何もせず完了扱いにする
