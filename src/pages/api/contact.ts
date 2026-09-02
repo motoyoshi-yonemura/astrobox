@@ -3,7 +3,7 @@ import { env } from 'cloudflare:workers';
 
 export const prerender = false;
 
-const RESEND_FROM = 'Astrobox <onboarding@resend.dev>';
+const RESEND_FROM = 'Astrobox <noreply@blauerwind.com>';
 const OWNER_EMAIL = 'yomomobile@gmail.com';
 
 async function sendMail(to: string, subject: string, text: string) {
