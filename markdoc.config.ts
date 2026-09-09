@@ -6,7 +6,7 @@ export default defineMarkdocConfig({
 			render: component('./src/components/ResizableImage.astro'),
 			attributes: {
 				src: { type: String, required: true },
-				alt: { type: String, required: true },
+				alt: { type: String },
 				width: { type: Number },
 			},
 		},
