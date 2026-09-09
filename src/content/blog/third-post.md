@@ -6,7 +6,7 @@ tags:
   - 階層化
   - microCMS
 ---
-astroとはなんぞやから始まり、少し分かってきたけれども、記事を増やすにはVSCodeを使うのは一般的ではない、以前microCMSと連携すると聞いたがそちらも調べてみようと思う
+![](./images/third-post/Introducer.png)astroとはなんぞやから始まり、少し分かってきたけれども、記事を増やすにはVSCodeを使うのは一般的ではない、以前microCMSと連携すると聞いたがそちらも調べてみようと思う
 
 ## microCMS
 
