@@ -26,7 +26,16 @@ export default config({
 					fields.text({ label: 'タグ' }),
 					{ label: 'タグ', itemLabel: (props) => props.value || '(未入力)' }
 				),
-				content: fields.markdoc({ label: '本文', extension: 'md' }),
+				content: fields.markdoc({
+					label: '本文',
+					extension: 'md',
+					options: {
+						image: {
+							directory: 'src/content/blog/images',
+							publicPath: './images/',
+						},
+					},
+				}),
 			},
 		}),
 	},
