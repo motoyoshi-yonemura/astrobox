@@ -4,6 +4,7 @@ import cloudflare from '@astrojs/cloudflare';
 import node from '@astrojs/node';
 import keystatic from '@keystatic/astro';
 import react from '@astrojs/react';
+import markdoc from '@astrojs/markdoc';
 
 // ローカル開発時 (npm run dev) は通常のNode.js環境で動かし、
 // Keystaticのローカル編集（ファイル書き込み）が正しく動くようにする。
@@ -14,5 +15,5 @@ const isDev = process.argv.includes('dev');
 export default defineConfig({
 	output: 'server',
 	adapter: isDev ? node({ mode: 'standalone' }) : cloudflare(),
-	integrations: [keystatic(), react()],
+	integrations: [keystatic(), react(), markdoc()],
 });

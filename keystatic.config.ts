@@ -1,4 +1,18 @@
 import { config, fields, collection } from '@keystatic/core';
+import { block } from '@keystatic/core/content-components';
+
+const resizableImage = block({
+	label: '画像（サイズ指定）',
+	schema: {
+		src: fields.image({
+			label: '画像',
+			directory: 'src/content/blog/images',
+			publicPath: './images/',
+		}),
+		alt: fields.text({ label: '代替テキスト' }),
+		width: fields.integer({ label: '幅(px)', defaultValue: 800 }),
+	},
+});
 
 export default config({
 	storage: {
@@ -28,12 +42,15 @@ export default config({
 				),
 				content: fields.markdoc({
 					label: '本文',
-					extension: 'md',
+					extension: 'mdoc',
 					options: {
 						image: {
 							directory: 'src/content/blog/images',
 							publicPath: './images/',
 						},
+					},
+					components: {
+						resizableImage,
 					},
 				}),
 			},

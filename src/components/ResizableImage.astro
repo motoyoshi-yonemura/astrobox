@@ -1,0 +1,25 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+	src: string;
+	alt: string;
+	width?: number;
+}
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+	'/src/content/blog/images/**/*.{jpeg,jpg,png,gif,webp,avif}'
+);
+
+const { src, alt, width } = Astro.props;
+const resolvedPath = `/src/content/blog/${src.replace(/^\.\//, '')}`;
+const importer = images[resolvedPath];
+
+if (!importer) {
+	throw new Error(`画像が見つかりません: ${resolvedPath}`);
+}
+
+const image = (await importer()).default;
+---
+
+<Image src={image} alt={alt} width={width} />
